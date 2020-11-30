@@ -28,7 +28,16 @@ if (isset($_POST['venda'])) {
                 $resulti = mysqli_query($connect, $sqli);
             
             }
+
             if($resulti){
+                $sql_est = "UPDATE produtos set qtde_est = qtde_est - '$qtde' WHERE id_produto = '$id';";
+                $res_est = mysqli_query($connect, $sql_est);
+            }else {
+                echo json_encode(['status'=>false, 'msg'=>'Erro na conexão!']);
+                mysqli_rollback($connect);
+            }
+
+            if($res_est){
                 echo json_encode(['status'=>true, 'msg'=>'Dados Inseridos com Sucesso!']);
                 mysqli_commit($connect);
             }else{

@@ -39,7 +39,7 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="fa fa-wifi"></i> <span><?php echo $title ?></span></a>
+                        <a href="index.html" class="site_title"><i class="fa fa-television" aria-hidden="true"></i> <span><?php echo $title ?></span></a>
                     </div>
                     <div class="clearfix"></div>
 
@@ -65,17 +65,19 @@
                         <div class="menu_section">
                             <h3>Menu do Sistema</h3>
                             <ul class="nav side-menu">
-                                <li><a href="<?php echo $pginicial ?>">Pagina Inicial</a></li>
-                                <li><a href="<?php echo $clientes ?>">Clientes</a></li>
-                                <li><a href="<?php echo $produtos ?>">Produtos</a></li>
-                                <li><a><i class="fa fa-edit"></i> Financeiro <span class="fa fa-chevron-down"></span></a>
+                                <li><a href="<?php echo $pginicial ?>"><i class="fa fa-line-chart" area-hidden="true"></i>Pagina Inicial</a></li>
+                                <li><a href="<?php echo $clientes ?>"><i class="fa fa-user" area-hidden="true"></i> Clientes</a></li>
+                                <li><a href="<?php echo $produtos ?>"><i class="fa fa-cubes"></i>Produtos</a></li>
+                                <li><a><i class="fa fa-usd"></i> Financeiro <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="<?php echo $caixa ?>">Caixa</a></li>
                                         <li><a href="<?php echo $ent ?>">Entrada Manual</a></li>
                                         <li><a href="<?php echo $sai ?>">Saida manual</a></li>
+                                        <li><a href="<?php echo $est ?>">Estorno</a></li>
+                                        <li><a href="<?php echo $fec ?>">Fechamento Caixa</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="<?php echo $usuarios ?>">Usuarios</a></li>
+                                <li><a href="<?php echo $usuarios ?>"><i class="fa fa-users"></i>Usuarios</a></li>
                             </ul>
                         </div>
                         

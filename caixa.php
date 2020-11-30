@@ -7,7 +7,7 @@ include_once('autentica.php');
 $sqlcli = "SELECT id_cliente, cliente FROM clientes ORDER BY cliente";
 $resultado = mysqli_query($connect, $sqlcli);
 
-$sqlpro = "SELECT id_produto, codigo, descricao FROM produtos ORDER BY descricao";
+$sqlpro = "SELECT id_produto, codigo, descricao, qtde_est FROM produtos WHERE  qtde_est > 0 ORDER BY descricao";
 $resultpro = mysqli_query($connect, $sqlpro);
 ?>
 
@@ -40,14 +40,15 @@ include_once('menu.php');
                     <option value="0">Selecione um Produto</option>
                     <?php while ($dados = $resultpro->fetch_array()) { ?>
 
-                        <option value="<?php echo $dados['id_produto']; ?>"><?php echo $dados['codigo']; ?> - <?php echo $dados['descricao']; ?></option>
+                        <option value="<?php echo $dados['id_produto']; ?>"><?php echo $dados['codigo']; ?> - <?php echo $dados['descricao']; ?> - Qtde em estoque <?php echo $dados['qtde_est'];?></option>
                     <?php } ?>
                 </select>
                 <br>
             </div>
             <div class="col-sm-1 col-md-1 ">
                 <label for="qtde">Qtde: </label>
-                <input type="number" name="qtde" id="qtde" class="form-control" autocomplete="off" maxlength="5"><br>
+                <input type="number" name="qtde" id="qtde" class="form-control" autocomplete="off" maxlength="5" min="1" disabled>
+                <br>
             </div>
             <div class="col-sm-1 col-md-1 ">
                 <input id="incluir" name="incluir" value="Incluir produto" type="button" class="btn btn-success btn-sm" onClick="incProd()" ></input>
@@ -76,9 +77,17 @@ include_once('menu.php');
                     </div>
                 </div>
             </div>
-            <div class="col-sm-1 col-md-5 ">
+            <div class="col-sm-1 col-md-4 ">
                 <label for="vtot" style="font-size: 250%">Valor Total: </label>
                 <input type="text" style="font-size: 150%; background-color: #fff" name="vtot" id="vtot" class="form-control" autocomplete="off" maxlength="10" placeholder="R$" disabled><br>
+            </div>
+            <div class="col-sm-1 col-md-4 ">
+                <label for="vrec" style="font-size: 250%">Valor Recebido: </label>
+                <input type="text" style="font-size: 150%; background-color: #fff" name="vrec" id="vrec" class="form-control" autocomplete="off" maxlength="10" placeholder="R$" disabled><br>
+            </div>
+            <div class="col-sm-1 col-md-4 ">
+                <label for="troco" style="font-size: 250%">Troco: </label>
+                <input type="text" style="font-size: 150%; background-color: #fff" name="troco" id="troco" class="form-control" autocomplete="off" maxlength="10" placeholder="R$" disabled><br>
             </div>
             <div class="clearfix"></div>
             <!-- Fim teste tabela -->
