@@ -93,11 +93,11 @@ function incProd(){
         })
     }else {
         $('#msg').attr('style', 'opacity:1; transition:opacity 2s')
-                $('#msg').attr('class', 'alert alert-error')
-                $('#msg').text("Obrigatório preencher todos os campos!")
-              setInterval(function(){
-                $('#msg').attr('style', 'opacity:0; transition:opacity 2s')
-                }, 3000)
+        $('#msg').attr('class', 'alert alert-error')
+        $('#msg').text("*Preencher todos os campos obrigatórios!")
+        setInterval(function(){
+            $('#msg').attr('style', 'opacity:0; transition:opacity 2s')
+        }, 3000)
     }
 
 }

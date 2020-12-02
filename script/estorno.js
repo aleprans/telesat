@@ -4,7 +4,6 @@ var qtde = $('#qtde')
 var val = $('#val')
 var estornar = $('#estornar')
 var canc = $('#cancelar')
-var val_limp
 
 // Converte para tipo Moeda
 function numberToReal(numero) {
@@ -14,50 +13,85 @@ function numberToReal(numero) {
 }
 
 
-//VALIDAÇÃO
-$('#val').blur(function(){
-    if(val.val() > 0){
-        var n = val.val().replace("R$ ", "")
-        var b = n.replace(",", ".")
-        val_limp = b
-        var v = numberToReal(parseFloat(val.val()))
-        val.val(v)
-        validar()
+// Mascara campo valor
+function formatarMoeda() {
+    var elemento = document.getElementById('val');
+    var valor = elemento.value;
+
+    valor = valor + '';
+    valor = parseInt(valor.replace(/[\D]+/g, ''));
+    valor = valor + '';
+    valor = valor.replace(/([0-9]{2})$/g, ",$1");
+
+    if (valor.length > 6) {
+        valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
     }
-})
+
+    elemento.value = valor;
+    if(valor == 'NaN') elemento.value = '';
+}
 
 $('#val').on('focus', function(){
     val.val("")
 })
 
-$('#qtde').blur(function(){
-    if(qtde.val() < 1){
-        qtde.val(1)
-        validar()
-    }
-})
-
-$('#prod').on('change', function(){
-    qtde.val("")
-    val.val("")
-    validar()
-})
-
-
+// Valiadar campos
 function validar(){
-    if(prod.val() > 0 && qtde.val() > 0 && val_limp > 0){
-        $('#estornar').attr('disabled', false)
-    }else{
-        $('#estornar').attr('disabled', true)
+    var status = 0
+    $('#prod').attr('style', 'border-color: gray')
+    $('#qtde').attr('style', 'border-color: gray')
+    $('#val').attr('style', 'border-color: gray')
+    if(prod.val() <= 0 ){
+        $('#prod').attr('style', 'border-color: red')
+        status = 1
     }
-}
+    
+    if (qtde.val() == "" || qtde.val() <= 0){
+        $('#qtde').attr('style', 'border-color: red')
+        status = 1
+    }
+    
+    if (val.val() <= 0) {
+        $('#val').attr('style', 'border-color: red')
+        status = 1
+    }
 
-$('#estornar').on('click', function estornar() {
+    if (status == 1){
+        $('#msg').attr('style', 'opacity:1; transition:opacity 2s')
+        $('#msg').attr('class', 'alert alert-danger')
+        $('#msg').text("Campo(s) obrigatório(s)!")
+        setInterval(function(){
+            $('#msg').attr('style', 'opacity:0; transition:opacity 2s')
+        }, 3000)
+        exit
+    }
+}    
+    
+// Envia daddos para estorno
+$('#estornar').on('click', function() {
+    validar()
+    var vr = val.val().replace(".", "")
+    console.log(val.val())
     $.getJSON('estornar.php', {
         produto: prod.val(),
         qtde: qtde.val(),
-        valor: val_limp.val()
-    }, function(json){
-
+        valor: vr.replace(",", ".")
+    },function(json){
+        if(json.status == true){
+            $('#msg').attr('style', 'opacity:1; transition:opacity 2s')
+            $('#msg').attr('class', 'alert alert-success')
+            $('#msg').text(json.msg)
+            setInterval(function(){
+                $('#msg').attr('style', 'opacity:0; transition:opacity 2s')
+            }, 3000)
+            window.location.reload()
+        }else {
+            $('#msg').attr('style', 'opacity:1; transition:opacity 2s')
+            $('#msg').attr('class', 'alert alert-error')
+            $('#msg').text(json.msg)
+            setInterval(function(){
+                $('#msg').attr('style', 'opacity:0; transition:opacity 2s')
+            }, 3000)
+        }
     })
 })

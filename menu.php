@@ -85,7 +85,7 @@
 
 
                     <div class="sidebar-footer hidden-small">
-                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="index.php">
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="logout.php">
                             <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                         </a>
                     </div>

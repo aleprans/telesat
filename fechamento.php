@@ -4,11 +4,6 @@ session_start();
 include_once('connect.php');
 include_once('autentica.php');
 
-$sqlcli = "SELECT id_cliente, cliente FROM clientes ORDER BY cliente";
-$resultado = mysqli_query($connect, $sqlcli);
-
-$sqlpro = "SELECT id_produto, codigo, descricao, qtde_est FROM produtos WHERE  qtde_est > 0 ORDER BY descricao";
-$resultpro = mysqli_query($connect, $sqlpro);
 ?>
 
 <!DOCTYPE html>
@@ -19,43 +14,15 @@ include_once('menu.php');
 
 <div class="right_col" role="main">
 <div id="msg" class="alert alert-success fade show" role="alert" style="opacity:0; text-align: center; display: fixed"></div>
-    <h1>Caixa</h1>
+    <h1>Fechamento de Caixa</h1>
 
     <div id="central" name="central">
         <form action="#" method="post" id="form">
-            <div class="col-sm-3 col-md-5">
-                <label for="cli">*Cliente: </label>
-                <select name="cli" id="cli" class="form-control">
-                    <option value="0">BALCÃO</option>
-                    <?php while ($dados = $resultado->fetch_array()) { ?>
-
-                        <option value="<?php echo $dados['id_cliente']; ?>"><?php echo $dados['cliente']; ?></option>
-                    <?php } ?>
-                </select>
-            </div>
-            <div class="col-sm-3 col-md-6" id="list_nome">
-                <label for="prod">*Produto: </label>
-                <select name="prod" id="prod" class="form-control">
-                    <option value="0">Selecione um Produto</option>
-                    <?php while ($dados = $resultpro->fetch_array()) { ?>
-
-                        <option value="<?php echo $dados['id_produto']; ?>"><?php echo $dados['codigo']; ?> - <?php echo $dados['descricao']; ?> </option>
-                    <?php } ?>
-                </select>
-                <br>
-            </div>
-            <div class="col-sm-1 col-md-1 ">
-                <label for="qtde">*Qtde: </label>
-                <input type="number" name="qtde" id="qtde" class="form-control" autocomplete="off" maxlength="5" min="1" disabled>
-                <br>
-            </div>
-            <div class="col-sm-1 col-md-1 ">
-                <input id="incluir" name="incluir" value="Incluir produto" type="button" class="btn btn-success btn-sm" onClick="incProd()" ></input>
-            </div><br>
+          
             <div class="col-md-12 col-sm-6  ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Produtos</h2>
+                        <h2>Lista de Vendas</h2>
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -63,10 +30,9 @@ include_once('menu.php');
                             <thead>
                                 <tr>
                                     <th>Código</th>
-                                    <th>Descrição</th>
-                                    <th>Valor un</th>
-                                    <th>Qtde</th>
-                                    <th>Valor total</th>
+                                    <th>Cliente</th>
+                                    <th>Valor</th>
+                                    <th>Data</th>
                                     <th>Ações</th>
                                 </tr>
                             </thead>
@@ -78,15 +44,15 @@ include_once('menu.php');
                 </div>
             </div>
             <div class="col-sm-1 col-md-4 ">
-                <label for="vtot" style="font-size: 250%">Valor Total: </label>
+                <label for="vtot" style="font-size: 250%">Valor total: </label>
                 <input type="text" style="font-size: 150%; background-color: #fff" name="vtot" id="vtot" class="form-control" autocomplete="off" maxlength="10" placeholder="R$" disabled><br>
             </div>
             <div class="col-sm-1 col-md-4 ">
-                <label for="vrec" style="font-size: 250%">Valor Recebido: </label>
+                <label for="vrec" style="font-size: 250%">Valor em dinheiro: </label>
                 <input type="text" style="font-size: 150%; background-color: #fff" name="vrec" id="vrec" class="form-control" autocomplete="off" maxlength="10" placeholder="R$" disabled><br>
             </div>
             <div class="col-sm-1 col-md-4 ">
-                <label for="troco" style="font-size: 250%">Troco: </label>
+                <label for="troco" style="font-size: 250%">Diferença: </label>
                 <input type="text" style="font-size: 150%; background-color: #fff" name="troco" id="troco" class="form-control" autocomplete="off" maxlength="10" placeholder="R$" disabled><br>
             </div>
             <div class="clearfix"></div>
@@ -141,7 +107,7 @@ include_once('rodape.php');
 
 <script src="bootstrap/gentelella-master/build/js/custom.min.js"></script>
 
-<script src="script/caixa.js"></script>
+<script src="script/"></script>
 </body>
 
 </html>

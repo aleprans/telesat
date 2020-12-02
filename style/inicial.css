@@ -2,3 +2,9 @@
     width: 12%;
     min-width: 12%;
 }
+
+div#msg {
+    width: 80%;
+    position: fixed;
+    text-align: center;
+}

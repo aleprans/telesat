@@ -9,9 +9,3 @@ button#enviar {
 button#cancelar {
   margin: 0px 1px 0px 10px;
 }
-
-div#msg {
-  width: 80%;
-  position: fixed;
-  text-align: center;
-}

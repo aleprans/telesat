@@ -3,9 +3,9 @@
 include_once('autentica.php');
 include_once('connect.php');
 
-$sql = "select sum(valor_vend) as total, day(dt_venda) as dia from vendas group by dt_venda order by dt_venda;";
+$sql = "select sum(valor_vend) as total, day(dt_venda) as dia from vendas where  month(dt_venda) = month(now()) group by dt_venda order by dt_venda;";
 $resultado = mysqli_query($connect, $sql);
-$sql2 = "select sum(valor_vend) as total from vendas;";
+$sql2 = "select month(now()) as mes, sum(valor_vend) as total from vendas where month(dt_venda) = month(now());";
 $resultado2 = mysqli_query($connect, $sql2);
 $dados2 = $resultado2->fetch_array();
 ?>
@@ -27,7 +27,7 @@ $dados2 = $resultado2->fetch_array();
         ]);
 
         var options = {
-          title: 'Faturamento Mensal Total R$ <?php echo number_format((float)$dados2['total'], 2, '.', ''); ?>',
+          title: 'Faturamento do Mês <?php echo $dados2['mes'];?> (R$ <?php echo number_format((float)$dados2['total'], 2, '.', ''); ?>)',
           subtitle: 'Diario',
           curveType: 'function',
           legend: { position: 'right' }

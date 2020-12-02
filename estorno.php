@@ -15,7 +15,7 @@ include_once('menu.php');
 <!-- conteudo -->
 
 <div class="right_col" role="main">
-<div id="msg" class="alert alert-success fade show" role="alert" style="opacity:0; text-align: center; display: fixed"></div>
+<div id="msg"  class ="fade show" role="alert"></div>
     <h1>Estorno</h1>
 
     <div id="central" name="central">
@@ -34,15 +34,15 @@ include_once('menu.php');
             </div>
             <div class="col-sm-1 col-md-1 ">
                 <label for="qtde">Qtde: </label>
-                <input type="number" name="qtde" id="qtde" class="form-control" autocomplete="off" maxlength="5" min="1"><br>
+                <input type="number" name="qtde" id="qtde" class="form-control" autocomplete="off" maxlength="5" min="1" value="1"><br>
             </div>
             <div class="col-sm-1 col-md-3 ">
                 <label for="val">Valor: </label>
-                <input type="text" name="val" id="val" class="form-control" autocomplete="off" maxlength="5" placeholder="R$"><br>
+                <input type="text" name="val" id="val" class="form-control" autocomplete="off" placeholder="0,00" onkeyup="formatarMoeda()"><br>
             </div>
             <dic class="clearfix"></dic>
             <div class="col-sm-1 col-md-5">
-                <input id="estornar" name="estornar" value="Realizar estorno" type="button" class="btn btn-success btn-lg" onClick="estornar()" disabled></input>
+                <input id="estornar" name="estornar" value="Realizar estorno" type="button" class="btn btn-success btn-lg" onClick="estornar()"></input>
                 <button id="cancelar" type="reset" class="btn btn-cancel btn-lg" onClick="limpar()">Cancelar</button>
             </div>
         </form>

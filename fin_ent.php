@@ -29,7 +29,7 @@ include_once('menu.php');
             </div>
             <div class="col-sm-3 col-md-3 ">
                 <label for="val">Valor: </label>
-                <input type="text" name="val" id="val" class="form-control" autocomplete="off" maxlength="10" onkeypress="return somenteNumeros(event)"><br>
+                <input type="text" name="val" id="val" class="form-control" autocomplete="off" onkeyup="formatarMoeda()"><br>
             </div>
             <div class="col-sm-3 col-md-3 ">
                 <label for="dt">Data: </label>

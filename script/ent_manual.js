@@ -69,18 +69,6 @@ $('#val').blur(function(){
     $val.val(v)
 })
 
-function numberToReal(numero) {
-    var numero = numero.toFixed(2).split('.');
-    numero[0] = "R$ " + numero[0].split(/(?=(?:...)*$)/).join('.');
-    return numero.join(',');
-}
-
-function limpar_mask(item){
-    var n = item.replace("R$ ", "")
-    var b = n.replace(",", ".")
-    return b
-}
-
 $('#descr').blur(function() {
     var tx = $('#descr').val()
     $('#descr').val(tx.toUpperCase())
@@ -105,13 +93,38 @@ $('#cancelar').on('click', function(){
 
 function hoje(){
     var $mes
+    var $dia
     var dNow = new Date();
     if (dNow.getMonth() < 10) {
         $mes = '0'+(dNow.getMonth()+1)
     }else {
         $mes = dNow.getMonth()+1
     }
+
+    if (dNow.getDate() < 10) {
+        $dia = '0'+(dNow.getDate())
+    }else {
+        $dia = dNow.getDate()
+    }
     
-    var localdate = dNow.getFullYear() + '-' + $mes + '-' + dNow.getDate();
+    var localdate = dNow.getFullYear() + '-' + $mes + '-' + $dia;
     return localdate;
+}
+
+// Mascara campo valor
+function formatarMoeda() {
+    var elemento = document.getElementById('val');
+    var valor = elemento.value;
+
+    valor = valor + '';
+    valor = parseInt(valor.replace(/[\D]+/g, ''));
+    valor = valor + '';
+    valor = valor.replace(/([0-9]{2})$/g, ",$1");
+
+    if (valor.length > 6) {
+        valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+    }
+
+    elemento.value = valor;
+    if(valor == 'NaN') elemento.value = '';
 }
