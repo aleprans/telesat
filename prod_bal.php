@@ -4,37 +4,37 @@ session_start();
 include_once('autentica.php');
 include_once('connect.php');
 
-$sql = "select * from produtos order by descricao";
+$sql = "select codigo, descricao, qtde_est from produtos order by codigo";
 
 $resultado = mysqli_query($connect, $sql);
 
 
 ?>
 <!DOCTYPE html>
+
 <?php
 include_once('menu.php');
 ?>
 <!-- conteudo -->
 
-
 <div class="right_col" role="main">
   <div id="msg" class="alert alert-success fade show" role="alert" style="opacity:0; text-align: center"></div>
   <h3>Lista de Produtos</h3>
   <div class="clearfix"></div>
-
+<div id="teste">
   <div class="content">
     <div class="animated fadeIn">
       <div class="row">
         <div class="col-md-12">
           <div class="card">
             <div class="table-responsive">
-              <table id="id_table_usuario" class="table table-hover" data-search="true" data-sort-class="table-active" data-sortable="true" data-locale="pt-BR" data-height="550" data-toolbar=".toolbar" data-search="true" data-show-toggle="true" data-pagination="true">
+              
+              <table id="balancete" class="table table-hover" data-search="true" data-sort-class="table-active" data-sortable="true" data-locale="pt-BR" data-height="550" data-toolbar=".toolbar" data-search="true" data-show-toggle="true" data-pagination="true">
+                
                 <thead>
                   <tr>
                     <th data-sortable="true" data-field="id">Código</th>
                     <th>Produto</th>
-                    <th>Custo</th>
-                    <th>Venda</th>
                     <th>Qtde em estoque</th>
                   </tr>
                 </thead>
@@ -46,11 +46,7 @@ include_once('menu.php');
                       <tr>
                         <td><?php echo $dados['codigo']; ?></td>
                         <td><?php echo $dados['descricao']; ?></td>
-                        <td><?php echo $dados['custo']; ?></td>
-                        <td><?php echo $dados['venda']; ?></td>
                         <td><?php echo $dados['qtde_est']; ?></td>
-                        <td><button class="btn btn-primary btn-sm" title="Editar Produto" data-toggle="tooltip" data-placement="bottom" onclick="editar(<?php echo $dados['id_produto']; ?>)"><i class="fa fa-pencil"></i></button>
-                          <button class="btn btn-danger btn-sm" title="Excluir Produto" data-toggle="tooltip" data-placement="bottom" onclick="excluir(<?php echo $dados['id_produto']; ?>)"><i class="fa fa-trash"></i> </button></td>
                       </tr>
                     <?php
                     }
@@ -59,25 +55,26 @@ include_once('menu.php');
                   <?php } ?>
 
                 </tbody>
-
+                
               </table>
-              <button class="btn btn-success btn-lg" title="Novo Produto" data-toggle="tooltip" data-placement="bottom" onclick="window.location = 'produtos.php'"><i class="fa fa-user-plus"></i> </button>
+              
+              <button  onclick="gerar_pdf()" id="gerar"><i class="fa fa-user-plus"></i> </button>
             </div>
           </div>
         </div>
       </div>
 
-      <div id="theModal" class="modal" tabindex="-1" role="dialog">
+      <!--<div id="theModal" class="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
           </div>
         </div>
-      </div>
+      </div>-->
 
     </div>
   </div>
 </div>
-
+</div>
 <!-- Fim do conteudo -->
 <?php
 include_once('rodape.php');
@@ -121,7 +118,11 @@ include_once('rodape.php');
 
 <script src="bootstrap/gentelella-master/build/js/custom.min.js"></script>
 
-<script src="script/listaproduto.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+<script src="script/balancete.js"></script>
 </body>
 
 </html>

@@ -13,6 +13,9 @@ $ent = "fin_ent.php";
 $sai = "fin_sai";
 $est = "estorno.php";
 $fec = "fechamento.php";
+$prod_ent = "ent_prod.php";
+$prod_sai = "sai_prod.php";
+$prod_bal = "prod_bal.php";
 
 if (!$_SESSION['usuario']) {
     header('Location: index.php');

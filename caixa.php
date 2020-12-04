@@ -16,7 +16,9 @@ $resultpro = mysqli_query($connect, $sqlpro);
 include_once('menu.php');
 ?>
 <!-- conteudo -->
-
+<style>
+    label{font-size: 170%}
+</style>
 <div class="right_col" role="main">
 <div id="msg" class="alert alert-success fade show" role="alert" style="opacity:0; text-align: center; display: fixed"></div>
     <h1>Caixa</h1>
@@ -33,7 +35,7 @@ include_once('menu.php');
                     <?php } ?>
                 </select>
             </div>
-            <div class="col-sm-3 col-md-6" id="list_nome">
+            <div class="col-sm-3 col-md-6">
                 <label for="prod">*Produto: </label>
                 <select name="prod" id="prod" class="form-control">
                     <option value="0">Selecione um Produto</option>
@@ -60,7 +62,7 @@ include_once('menu.php');
                     </div>
                     <div class="x_content">
                         <table class="table table-striped" id="tbprod">
-                            <thead>
+                            <thead style="font-size:125%">
                                 <tr>
                                     <th>Código</th>
                                     <th>Descrição</th>
@@ -77,12 +79,23 @@ include_once('menu.php');
                     </div>
                 </div>
             </div>
-            <div class="col-sm-1 col-md-4 ">
-                <label for="vtot" style="font-size: 250%">Valor Total: </label>
-                <input type="text" style="font-size: 150%; background-color: #fff" name="vtot" id="vtot" class="form-control" autocomplete="off" maxlength="10" placeholder="R$" disabled><br>
+             <div class="col-sm-3 col-md-6" id="list_nome">
+                <label for="form_pag" >Forma de pagamento: </label>
+                <select name="form_pag" id="form_pag" class="form-control">
+                    <option value="0">Dinheiro</option>
+                    <option value="1">Débito</option>
+                    <option value="2">Crédito à vista</option>
+                    <option value="3">Crédito à prazo</option>
+                </select>
+                <br>
             </div>
             <div class="col-sm-1 col-md-4 ">
-                <label for="vrec" style="font-size: 250%">Valor Recebido: </label>
+                <label for="vtot" >Valor Total: </label>
+                <input type="text" style="font-size: 150%; background-color: #fff" name="vtot" id="vtot" class="form-control" autocomplete="off" maxlength="10" placeholder="R$" disabled><br>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-sm-1 col-md-4 ">
+                <label for="vrec" >Valor Recebido: </label>
                 <input type="text" style="font-size: 150%; background-color: #fff" name="vrec" id="vrec" class="form-control" autocomplete="off" maxlength="10" placeholder="R$" disabled><br>
             </div>
             <div class="col-sm-1 col-md-4 ">
@@ -90,7 +103,7 @@ include_once('menu.php');
                 <input type="text" style="font-size: 150%; background-color: #fff" name="troco" id="troco" class="form-control" autocomplete="off" maxlength="10" placeholder="R$" disabled><br>
             </div>
             <div class="clearfix"></div>
-            <!-- Fim teste tabela -->
+           
 
             <div class="col-sm-1 col-md-5">
                 <input id="enviar" name="enviar" value="Finalizar compra" type="button" class="btn btn-success btn-lg" onClick="finalizar()" ></input>

@@ -23,27 +23,21 @@ include_once('menu.php');
                 <label for="cod">Código: </label>
                 <input type="text" name="cod" id="cod" class="form-control" placeholder="Código do Produto" autocomplete="off" maxlength="14"><br>
             </div>
-            <div class="col-sm-6 col-md-6" id="list_nome">
+            <div class="col-sm-4 col-md-7" id="list_nome">
                 <label for="descr">Descrição: </label>
                 <input type="text" name="descr" id="descr" class="form-control" placeholder="Descrição do produto" autocomplete="off" maxlength="50" disabled="true"><br>
                 <input type="hidden" name="id_pro" id="id_pro">
             </div>
-            <div class="col-sm-6 col-md-7">
+            <div class="clearfix"></div>
+            <div class="col-sm-1 col-md-2">
                 <label for="custo">Custo: </label>
-                <input type="text" name="custo" id="custo" class="form-control" placeholder="Valor de custo" autocomplete="off" maxlength="10" disabled="true">
+                <input type="text" name="custo" id="custo" class="form-control" placeholder="Valor de custo" autocomplete="off" onkeyup="formatarMoeda(this)" disabled="true">
             </div>
-            <div class="col-sm-6 col-md-2">
+            <div class="col-sm-1 col-md-2">
                 <label for="venda">Venda: </label>
-                <input type="text" name="venda" id="venda" class="form-control" placeholder="Valor de venda" autocomplete="off" maxlength="10" disabled="true"><br>
+                <input type="text" name="venda" id="venda" class="form-control" placeholder="Valor de venda" autocomplete="off" onkeyup="formatarMoeda(this)" disabled="true"><br>
             </div>
-            <div class="col-sm-6 col-md-4">
-                <label for="qtde">Qtde: </label>
-                <input type="number" name="qtde" id="qtde" class="form-control" placeholder="Qtde em estoque" autocomplete="off" maxlength="5" disabled="true"><br>
-            </div>
-            <div class="col-sm-6 col-md-4">
-                <label for="qvend">Qtde vendidos: </label>
-                <input type="number" name="qvend" id="qvend" class="form-control" placeholder="Qtde vendidos" autocomplete="off" maxlength="6" disabled="true"><br>
-            </div>
+            <div class="clearfix"></div>
             <div class="col-sm-5 col-md-5">
                 <input id="enviar" name="enviar" value="Salvar" type="button" class="btn btn-success btn-lg" onClick="validar()" disabled="true"></input>
                 <button id="cancelar" type="reset" class="btn btn-cancel btn-lg" onClick="limpar()">Cancelar</button>

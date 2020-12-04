@@ -1,6 +1,7 @@
 $(document).ready (function(){
     $('#cli').select2()
     $('#prod').select2()
+    $('#form_pag').select2()
     
 })
 
@@ -9,14 +10,15 @@ var $tbody = document.querySelector(".table tbody")
 var $cli = $('#cli')
 var $prod = $('#prod')
 var $qtde = $('#qtde')
+var $form = $('#form_pag')
 var cod
 var descr
 var vuni
 var qtde
-var $cli_sel
 var $vtot = $('#vtot')
 var fcomp = []
 var $cli_sel = 0
+var $form_sel = 0
 var indice
 var codg
 var total = 0
@@ -37,7 +39,7 @@ function incluir(){
                         '<td><button class="btn btn-danger btn-sm excluir" onclick="deleteRow(this)"><i class="fa fa-trash"></i></button></td>'
                         
                         atualiza()
-                        fcomp.push({cod: cod,cli: $cli_sel, total: total, id: id, qtde: qtde})
+                        fcomp.push({cod: cod,cli: $cli_sel, total: total, id: id, qtde: qtde, form: $form_sel})
     if (fcomp.length > 0){
         receb.attr('disabled', false)
     }else {
@@ -115,7 +117,6 @@ function deleteRow(btn){
 
 // FINALIZA A COMPRA
 function finalizar() {
-    
     if (fcomp.length > 0){
         $.ajax({
             url:'incluirVenda.php',
@@ -159,6 +160,14 @@ $('#cli').on('change', function(){
     $cli_sel = $(this).val()
     for (var i = 0; i < fcomp.length; i++){
         fcomp[i].cli = $cli_sel
+    }
+})
+
+// Funções do campo form_pag
+$('#form_pag').on('change', function(){
+    $form_sel = $(this).val()
+    for (var i = 0; i < fcomp.length; i++){
+        fcomp[i].form = $form_sel
     }
 })
 

@@ -8,16 +8,14 @@ function retorna($connect, $id_produto){
     $custo = mysqli_escape_string($connect, $_POST['custo']);
     $desc = mysqli_escape_string($connect, $_POST['desc']);
     $venda = mysqli_escape_string($connect, $_POST['venda']);
-    $qvend = mysqli_escape_string($connect, $_POST['qvend']);
-    $qtde = mysqli_escape_string($connect, $_POST['qtde']);
     $cod = mysqli_escape_string($connect, $_POST['cod']);
 
     if ($id_produto > 0) {
-        $sql = "UPDATE produtos SET codigo = '$cod', custo = '$custo', descricao = '$desc', venda = '$venda', qtde_est = '$qtde', qtde_vend = '$qvend' WHERE  id_produto = '$id_produto';";
+        $sql = "UPDATE produtos SET codigo = '$cod', custo = '$custo', descricao = '$desc', venda = '$venda', WHERE  id_produto = '$id_produto';";
         $resultado = mysqli_query($connect, $sql);
     } else {
         
-        $sql = "INSERT INTO produtos(codigo, custo, venda, descricao, qtde_est, qtde_vend) VALUES ('$cod', '$custo', '$venda', '$desc', '$qtde', '$qvend');";
+        $sql = "INSERT INTO produtos(codigo, custo, venda, descricao) VALUES ('$cod', '$custo', '$venda', '$desc');";
         $resultado = mysqli_query($connect, $sql);
     }
 

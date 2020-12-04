@@ -27,9 +27,7 @@ var $cod = $('#cod')
 var $desc = $('#descr')
 var $custo = $('#custo')
 var $venda = $('#venda')
-var $qtde = $('#qtde')
 var $env = $('#enviar')
-var $qvend = $('#qvend')
 
 if ($id_produto) {
   $.getJSON('pesq_produto.php', {
@@ -39,13 +37,9 @@ if ($id_produto) {
     $desc.val(json.desc)
     $custo.val(json.custo)
     $venda.val(json.venda)
-    $qtde.val(json.qtde)
-    $qvend.val(json.qvend)
     
     $desc.attr('disabled', false)
     $venda.attr('disabled', false)
-    $qtde.attr('disabled', false)
-    $qvend.attr('disabled', false)
     $custo.attr('disabled', false)
     $env.attr('disabled', false)
   })
@@ -57,22 +51,14 @@ if ($id_produto) {
       $desc.val(json.desc)
       $custo.val(json.custo)
       $venda.val(json.venda)
-      $qtde.val(json.qtde)
-      $qvend.val(json.qvend)
     
       $desc.attr('disabled', false)
       $venda.attr('disabled', false)
-      $qtde.attr('disabled', false)
-      $qvend.attr('disabled', false)
       $custo.attr('disabled', false)
       $env.attr('disabled', false)
       })
   })
 }
-
-//Mascara do valor
-$('#custo').mask('#.##0,00', {reverse: true});
-$('#venda').mask('#.##0,00', {reverse: true})
 
 // Limpar
 function limpar(){
@@ -88,8 +74,6 @@ function validar() {
   $desc.attr('style', 'border-color:gren')
   $venda.attr('style', 'border-color:gren')
   $custo.attr('style', 'border-color:gren')
-  $qtde.attr('style', 'border-color:gren')
-  $qvend.attr('style', 'border-color:gren')
   
   var msg = "Campo inválido!"
 
@@ -115,18 +99,6 @@ function validar() {
     $venda.attr('style', 'border-color:red')
     exit
   }
-
-  if ($qtde <= 0) {
-    $('#msg').attr('style', 'opacity:1; text-align: center; transition:opacity 2s' )
-    $('#msg').attr('class', 'alert alert-error')
-    $('#msg').text(msg)
-  setInterval(function(){
-    $('#msg').attr('style', 'opacity:0;text-align: center; transition:opacity 2s')
-  }, 3000)
-    $qtde.focus()
-    $qtde.attr('style', 'border-color:red')
-    exit
-  }
   enviar()
 }
 
@@ -150,8 +122,6 @@ function enviar(){
   form_data.append('desc', $desc.val())
   form_data.append('custo', $vcust)
   form_data.append('venda', $vtot)
-  form_data.append('qtde', $qtde.val())
-  form_data.append('qvend', $qvend.val())
 
   $.ajax({
     url: 'incluirProduto.php',
@@ -187,6 +157,26 @@ function enviar(){
   })
 }
 
+// Mascara campo valor
+function formatarMoeda(e) {
+  // var elemento = document.getElementById(campo);
+  var valor = e.value;
+  valor = valor + '';
+  valor = parseInt(valor.replace(/[\D]+/g, ''));
+  valor = valor + '';
+  valor = valor.replace(/([0-9]{2})$/g, ",$1");
+
+  if (valor.length > 6) {
+      valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+  }
+
+  e.value = valor;
+  if(valor == 'NaN') e.value = '';
+}
+
+$('#val').on('focus', function(){
+  val.val("")
+})
 
 
 
