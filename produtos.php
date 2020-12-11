@@ -21,7 +21,7 @@ include_once('menu.php');
 
             <div class="col-sm-6 col-md-3">
                 <label for="cod">Código: </label>
-                <input type="text" name="cod" id="cod" class="form-control" placeholder="Código do Produto" autocomplete="off" maxlength="14"><br>
+                <input type="text" name="cod" id="cod" class="form-control" placeholder="Código do Produto" autocomplete="off" maxlength="12"><br>
             </div>
             <div class="col-sm-4 col-md-7" id="list_nome">
                 <label for="descr">Descrição: </label>

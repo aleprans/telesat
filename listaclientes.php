@@ -55,7 +55,6 @@ $resultado = mysqli_query($connect, $sql);
                               <td><?php echo $dados['uf']; ?></td>
                               <td><button class="btn btn-primary btn-sm" title="Editar Cliente" data-toggle="tooltip" data-placement="bottom" onclick="editar(<?php echo $dados['id_cliente']; ?>)"><i class="fa fa-pencil"></i></button></td>
                               <td><button class="btn btn-danger btn-sm" title="Excluir Cliente" data-toggle="tooltip" data-placement="bottom" onclick="excluir(<?php echo $dados['id_cliente']; ?>)"><i class="fa fa-trash"></i> </button></td>
-                              <!--<td><button class="btn btn-success btn-sm" title="Agendar Visita" data-toggle="tooltip" data-placement="bottom" onclick="agendar(<?php echo $dados['id_cliente']; ?>)"><i class="fa fa-book"></i></button></td> -->
                             </tr><?php
                                 }
                               } else { ?>

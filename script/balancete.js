@@ -27,8 +27,7 @@ $(document).ready(function(){
 
   //pdf 	
   $("#gerar").click(function(){
-  
-      html2canvas(document.getElementById("teste"), {
+      html2canvas(document.getElementById("pdf"), {
           onrendered: function(canvas) {
               data = new Date();                
               var imgData = canvas.toDataURL('image/jpeg');
@@ -55,7 +54,7 @@ $(document).ready(function(){
                 doc.addImage(imgData, 'jpeg', 20, position, imgWidth + fix_imgWidth, imgHeight + fix_imgHeight);
                 heightLeft -= pageHeight;
               }
-              doc.print("Balancete - "+data.getDate()+"/"+data.getMonth()+"/"+data.getFullYear()+".pdf");
+              doc.save("Balancete - "+data.getDate()+"/"+data.getMonth()+"/"+data.getFullYear()+".pdf");
           }  
       });
   

@@ -11,7 +11,9 @@ if (isset($_POST['venda'])) {
     $cli = $array[$key]['cli'];
     $usu = $_SESSION['usuario']['usu'];
     $form = $array[$key]['form'];
+   
 
+    
     mysqli_autocommit($connect, false);
 
     mysqli_begin_transaction($connect);
@@ -24,8 +26,9 @@ if (isset($_POST['venda'])) {
             for($i = 0; $i < count($array); $i++){
                 $id = $array[$i]['id'];
                 $qtde = $array[$i]['qtde'];
-
-                $sqli = "INSERT INTO itens_venda (id_item_vend, id_venda, qtde_item) VALUES ('$id', '$last_id', '$qtde');";
+                $tot_uni = $array[$i]['tot_uni'];
+               
+                $sqli = "INSERT INTO itens_venda (id_item_vend, id_venda, qtde_item, valor) VALUES ('$id', '$last_id', '$qtde', '$tot_uni');";
                 $resulti = mysqli_query($connect, $sqli);
             
             }

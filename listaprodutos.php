@@ -4,10 +4,9 @@ session_start();
 include_once('autentica.php');
 include_once('connect.php');
 
-$sql = "select * from produtos order by descricao";
+$sql = "select id_produto, codigo, descricao, custo, venda from produtos order by descricao";
 
 $resultado = mysqli_query($connect, $sql);
-
 
 ?>
 <!DOCTYPE html>
@@ -32,10 +31,10 @@ include_once('menu.php');
                 <thead>
                   <tr>
                     <th data-sortable="true" data-field="id">Código</th>
-                    <th>Produto</th>
-                    <th>Custo</th>
-                    <th>Venda</th>
-                    <th>Qtde em estoque</th>
+                    <th class="text-center">Produto</th>
+                    <th class="text-center">Custo</th>
+                    <th class="text-center">Venda</th>
+                    <th class="text-center">Ações</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -45,17 +44,16 @@ include_once('menu.php');
                     while ($dados = $resultado->fetch_array()) { ?>
                       <tr>
                         <td><?php echo $dados['codigo']; ?></td>
-                        <td><?php echo $dados['descricao']; ?></td>
-                        <td><?php echo $dados['custo']; ?></td>
-                        <td><?php echo $dados['venda']; ?></td>
-                        <td><?php echo $dados['qtde_est']; ?></td>
-                        <td><button class="btn btn-primary btn-sm" title="Editar Produto" data-toggle="tooltip" data-placement="bottom" onclick="editar(<?php echo $dados['id_produto']; ?>)"><i class="fa fa-pencil"></i></button>
+                        <td class="text-center"><?php echo $dados['descricao']; ?></td>
+                        <td class="text-center"><?php echo $dados['custo']; ?></td>
+                        <td class="text-center"><?php echo $dados['venda']; ?></td>
+                        <td class="text-center"><button class="btn btn-primary btn-sm" title="Editar Produto" data-toggle="tooltip" data-placement="bottom" onclick="editar(<?php echo $dados['id_produto']; ?>)"><i class="fa fa-pencil"></i></button>
                           <button class="btn btn-danger btn-sm" title="Excluir Produto" data-toggle="tooltip" data-placement="bottom" onclick="excluir(<?php echo $dados['id_produto']; ?>)"><i class="fa fa-trash"></i> </button></td>
                       </tr>
                     <?php
                     }
                   } else { ?>
-                    <td id="tdnull" colspan="7">Nenhum Produto Cadastrado</td>
+                    <td id="tdnull" colspan="5">Nenhum Produto Cadastrado</td>
                   <?php } ?>
 
                 </tbody>

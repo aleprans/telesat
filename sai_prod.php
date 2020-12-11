@@ -4,10 +4,7 @@ session_start();
 include_once('connect.php');
 include_once('autentica.php');
 
-$sqlcli = "SELECT id_cliente, cliente FROM clientes ORDER BY cliente";
-$resultado = mysqli_query($connect, $sqlcli);
-
-$sqlpro = "SELECT id_produto, codigo, descricao FROM produtos ORDER BY descricao";
+$sqlpro = "SELECT id_produto, codigo, descricao FROM produtos WHERE qtde_est > 0 ORDER BY descricao";
 $resultpro = mysqli_query($connect, $sqlpro);
 ?>
 
@@ -18,26 +15,32 @@ include_once('menu.php');
 <!-- conteudo -->
 
 <div class="right_col" role="main">
-<div id="msg" class="alert alert-success fade show" role="alert" style="opacity:0; text-align: center; display: fixed"></div>
-    <h1>Entrada manual</h1><br>
-    
+<div id="msg"  class ="fade show" role="alert"></div>
+    <h1>Saida do estoque</h1>
+
     <div id="central" name="central">
         <form action="#" method="post" id="form">
-            <div class="col-sm-3 col-md-6 ">
-                <label for="descr">Descrição: </label>
-                <input type="text" name="descr" id="descr" class="form-control" autocomplete="off" maxlength="45"><br>
+
+            <div class="col-sm-3 col-md-6 " id="list_nome">
+                <label for="prod">Produto: </label>
+                <select name="prod" id="prod" class="form-control">
+                    <option value="0">Selecione um Produto</option>
+                    <?php while ($dados = $resultpro->fetch_array()) { ?>
+
+                        <option value="<?php echo $dados['id_produto']; ?>"><?php echo $dados['codigo']; ?> - <?php echo $dados['descricao']; ?></option>
+                    <?php } ?>
+                </select>
+                <br>
             </div>
-            <div class="col-sm-3 col-md-3 ">
-                <label for="val">Valor: </label>
-                <input type="text" name="val" id="val" class="form-control" autocomplete="off" onkeyup="formatarMoeda()"><br>
+            <div class="col-sm-1 col-md-1 ">
+                <label for="qtde">Qtde: </label>
+                <input type="number" name="qtde" id="qtde" class="form-control" autocomplete="off" maxlength="5" min="1" value="1"><br>
             </div>
-            <div class="col-sm-3 col-md-3 ">
-                <label for="dt">Data: </label>
-                <input type="date" name="dt" id="dt" class="form-control" disabled><br>
-            </div><div class="clearfix"></div><br>
+            
+            <dic class="clearfix"></dic>
             <div class="col-sm-1 col-md-5">
-                <input id="enviar" name="enviar" value="Finalizar Entrada" type="button" class="btn btn-success btn-lg" onClick="finalizar()" ></input>
-                <button id="cancelar" type="reset" class="btn btn-cancel btn-lg">Cancelar</button>
+                <input id="estornar" name="estornar" value="Realizar saida" type="button" class="btn btn-success btn-lg" onClick="validar()"></input>
+                <button id="cancelar" type="reset" class="btn btn-cancel btn-lg" onClick="limpar()">Cancelar</button>
             </div>
         </form>
     </div>
@@ -84,7 +87,7 @@ include_once('rodape.php');
 
 <script src="bootstrap/gentelella-master/build/js/custom.min.js"></script>
 
-<script src="script/ent_manual.js"></script>
+<script src="script/sai_est.js"></script>
 </body>
 
 </html>

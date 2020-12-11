@@ -33,7 +33,7 @@ include_once('menu.php');
             </div>
             <div class="col-sm-3 col-md-3 ">
                 <label for="dt">Data: </label>
-                <input type="date" name="dt" id="dt" class="form-control"><br>
+                <input type="date" name="dt" id="dt" class="form-control" disabled><br>
             </div><div class="clearfix"></div><br>
             <div class="col-sm-1 col-md-5">
                 <input id="enviar" name="enviar" value="Finalizar Saida" type="button" class="btn btn-success btn-lg" onClick="finalizar()" ></input>

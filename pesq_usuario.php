@@ -19,7 +19,7 @@ function retorna2($id_usuario, $connect) {
     $row_usu = mysqli_fetch_assoc($resultado);
     $dados['id_cli'] = $row_usu['id_usuario'];
     $dados['nome'] = $row_usu['nome'];
-    $dados['usuario'] = $row_cliente['usuario'];
+    $dados['usuario'] = $row_usu['usuario'];
 
     return json_encode($dados);
 }

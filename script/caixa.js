@@ -39,7 +39,9 @@ function incluir(){
                         '<td><button class="btn btn-danger btn-sm excluir" onclick="deleteRow(this)"><i class="fa fa-trash"></i></button></td>'
                         
                         atualiza()
-                        fcomp.push({cod: cod,cli: $cli_sel, total: total, id: id, qtde: qtde, form: $form_sel})
+                        var v1 = vtot.replace(".", "")
+                        var v_uni = v1.replace(",", ".")
+                        fcomp.push({cod: cod,cli: $cli_sel, total: total, id: id, qtde: qtde, form: $form_sel, tot_uni: v_uni})
     if (fcomp.length > 0){
         receb.attr('disabled', false)
     }else {
@@ -75,7 +77,9 @@ function incProd(){
         $.getJSON('pesq_produto.php', {
             produto: $prod.val()
         }, function(json){
-            if(json.qtde >= $qtde.val()){
+            console.log(json.qtde)
+            console.log($qtde.val())
+            if (json.qtde > $qtde.val()){
             cod = json.cod
             descr = json.desc
             vuni = numberToReal(parseFloat(json.venda))
@@ -169,6 +173,9 @@ $('#form_pag').on('change', function(){
     for (var i = 0; i < fcomp.length; i++){
         fcomp[i].form = $form_sel
     }
+    if ($(this).val() > 0){
+        receb.attr('disabled', true)
+    }
 })
 
 // Funções do campo Produto
@@ -185,9 +192,9 @@ $('#prod').on('change', function(){
 // Funções do campo valor recebido
 $('#vrec').blur(function(){
     if(receb.val() != ""){
-        var v = receb.val()
-        receb.val(numberToReal(parseFloat(v)))
-        calcTroco(v)
+        // var v = receb.val()
+        // receb.val(v)
+        calcTroco(receb.val())
     }
 })
 
@@ -201,13 +208,16 @@ $('#vrec').on('focus', function(){
 
 // Calcula o valor do troco
 function calcTroco(v){
-    troco.val(numberToReal(parseFloat(v - total)))
+        var v2 = v.replace(".", "")
+        var v3 = v2.replace(",", ".")
+        var tr = parseFloat(v3) - parseFloat(total)
+    troco.val(numberToReal(parseFloat(tr)))
 }
 
 // Converte para tipo Moeda
 function numberToReal(numero) {
     var numero = numero.toFixed(2).split('.');
-    numero[0] = "R$ " + numero[0].split(/(?=(?:...)*$)/).join('.');
+    numero[0] = numero[0].split(/(?=(?:...)*$)/).join('.');
     return numero.join(',');
 }
 
@@ -224,7 +234,26 @@ function pesquisa(valor){
 $('#form').submit(function(event){
     event.preventDefault()
 })
+
 // recaregar tela
 function limpar(){
     location.reload()
+}
+
+// Mascara campo valor
+function formatarMoeda(item) {
+    var elemento = document.getElementById(item);
+    var valor = elemento.value;
+
+    valor = valor + '';
+    valor = parseInt(valor.replace(/[\D]+/g, ''));
+    valor = valor + '';
+    valor = valor.replace(/([0-9]{2})$/g, ",$1");
+
+    if (valor.length > 6) {
+        valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+    }
+   
+    elemento.value = valor;
+    if(valor == 'NaN') elemento.value = '';
 }

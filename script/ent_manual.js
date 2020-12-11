@@ -8,12 +8,14 @@ var $can = $('#cancelar')
 var $dt = $('#dt')
 
 function finalizar(){
-    if ($descr.val() != "" || $val.val() != "") {
+    if ($descr.val().length > 4 && $val.val() != "") {
         
+        var v = $val.val().replace(".", "")
+        var v2 = v.replace(",", ".")
         var form_data = new FormData();
 
         form_data.append('descr', $descr.val())
-        form_data.append('val', limpar_mask($val.val()))
+        form_data.append('val', v2)
         form_data.append('dt', $dt.val())
         form_data.append('tipo', 'E')
 

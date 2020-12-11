@@ -48,15 +48,25 @@ if ($id_produto) {
     $.getJSON('pesq_produto.php', {
       cod_prod: $cod.val()
     },function(json) {
-      $desc.val(json.desc)
-      $custo.val(json.custo)
-      $venda.val(json.venda)
-    
-      $desc.attr('disabled', false)
-      $venda.attr('disabled', false)
-      $custo.attr('disabled', false)
-      $env.attr('disabled', false)
-      })
+      if (json.desc != null){
+        $('#msg').attr('style', 'opacity:1; transition:opacity 2s')
+        $('#msg').attr('class', 'alert alert-error')
+        $('#msg').text('Código já cadastrado!')
+        setInterval(function(){
+        $('#msg').attr('style', 'opacity:0; transition:opacity 2s')
+        }, 3000)
+        $cod.val("")
+        $cod.focus()
+        $desc.attr('disabled', true)
+        $custo.attr('disabled', true)
+        $venda.attr('disabled', true)
+      }else {
+        $desc.attr('disabled', false)
+        $custo.attr('disabled', false)
+        $venda.attr('disabled', false)
+        $desc.focus()
+      }
+    })
   })
 }
 

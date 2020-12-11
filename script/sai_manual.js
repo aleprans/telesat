@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $dt.val(hoje())
+   $dt.val(hoje())
 })
 var $descr = $('#descr')
 var $val = $('#val')
@@ -8,12 +8,14 @@ var $can = $('#cancelar')
 var $dt = $('#dt')
 
 function finalizar(){
-    if ($descr.val() != "" || $val.val() != "") {
+    if ($descr.val().length > 4 && $val.val() != "") {
         
+        var v = $val.val().replace(".", "")
+        var v2 = v.replace(",", ".")
         var form_data = new FormData();
 
         form_data.append('descr', $descr.val())
-        form_data.append('val', $val.val())
+        form_data.append('val', v2)
         form_data.append('dt', $dt.val())
         form_data.append('tipo', 'S')
 
@@ -34,7 +36,7 @@ function finalizar(){
                 $('#msg').text(data.msg)
                 setInterval(function(){
                     $('#msg').attr('style', 'opacity:0; transition:opacity 2s')
-                    window.location.reload()
+                    window.location = "fin_sai.php"
                 }, 3000)
                 }else{
                 $('#msg').attr('style', 'opacity:1; transition:opacity 2s')
@@ -64,6 +66,53 @@ $('#form').submit(function(event){
     event.preventDefault()
 })
 
+$('#val').blur(function(){
+    var v = numberToReal(parseFloat($val.val()))
+    $val.val(v)
+})
+
+$('#descr').blur(function() {
+    var tx = $('#descr').val()
+    $('#descr').val(tx.toUpperCase())
+})
+
+function somenteNumeros(e) {
+    var charCode = e.charCode ? e.charCode : e.keyCode;
+    // charCode 8 = backspace   
+    // charCode 9 = tab
+    // charCode 46 = .
+    if (charCode != 8 && charCode != 9 && charCode != 46) {
+        // charCode 48 equivale a 0   
+        // charCode 57 equivale a 9
+        if (charCode < 48 || charCode > 57) {
+            return false;
+        }
+    }
+}
+$('#cancelar').on('click', function(){
+    location.reload()
+})
+
+function hoje(){
+    var $mes
+    var $dia
+    var dNow = new Date();
+    if (dNow.getMonth() < 10) {
+        $mes = '0'+(dNow.getMonth()+1)
+    }else {
+        $mes = dNow.getMonth()+1
+    }
+
+    if (dNow.getDate() < 10) {
+        $dia = '0'+(dNow.getDate())
+    }else {
+        $dia = dNow.getDate()
+    }
+    
+    var localdate = dNow.getFullYear() + '-' + $mes + '-' + $dia;
+    return localdate;
+}
+
 // Mascara campo valor
 function formatarMoeda() {
     var elemento = document.getElementById('val');
@@ -80,34 +129,4 @@ function formatarMoeda() {
 
     elemento.value = valor;
     if(valor == 'NaN') elemento.value = '';
-}
-
-$('#descr').blur(function() {
-    var tx = $('#descr').val()
-    $('#descr').val(tx.toUpperCase())
-})
-
-
-$('#cancelar').on('click', function(){
-    location.reload()
-})
-
-function hoje(){
-    var $mes
-    var $dia
-    var dNow = new Date();
-    if (dNow.getMonth() < 10) {
-        $mes = '0'+(dNow.getMonth()+1)
-    }else {
-        $mes = dNow.getMonth()+1
-    }
-
-    if(dNow.getDate() < 10){
-        $dia = '0'+(dNow.getDate())
-    }else {
-        $dia = dNow.getDate()
-    }
-    
-    var localdate =  dNow.getFullYear() + '-' + $mes + '-' + $dia;
-    return localdate;
 }

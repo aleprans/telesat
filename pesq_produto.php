@@ -3,17 +3,20 @@ include_once('connect.php');
 
 function retorna($connect, $sqlprod){
 
-$result_prod = mysqli_query($connect, $sqlprod);
-$row_prod = mysqli_fetch_assoc($result_prod);
+    $result_prod = mysqli_query($connect, $sqlprod);
+    $row_prod = mysqli_fetch_assoc($result_prod);
+    if($row_prod == null){
+        return json_encode(['status']);
+    }else {
+        $dados['id_prod'] = $row_prod['id_produto'];
+        $dados['cod'] = $row_prod['codigo'];
+        $dados['desc'] = $row_prod['descricao'];
+        $dados['custo'] = $row_prod['custo'];
+        $dados['venda'] = $row_prod['venda'];
+        $dados['qtde'] = $row_prod['qtde_est'];
 
-$dados['id_prod'] = $row_prod['id_produto'];
-$dados['cod'] = $row_prod['codigo'];
-$dados['desc'] = $row_prod['descricao'];
-$dados['custo'] = $row_prod['custo'];
-$dados['venda'] = $row_prod['venda'];
-$dados['qtde'] = $row_prod['qtde_est'];
-
-return json_encode($dados);
+        return json_encode($dados);
+    }
 }
 
 if (isset($_GET['produto'])) {
@@ -25,6 +28,6 @@ if (isset($_GET['produto'])) {
 if (isset($_GET['cod_prod'])) {
     $valor = $_GET['cod_prod'];
     $sqlprod = "select * from produtos where codigo = '$valor';";
-    echo retorna($connect, $sqlprod);
+     echo retorna($connect, $sqlprod);
 }
 ?>

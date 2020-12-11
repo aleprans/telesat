@@ -1,7 +1,7 @@
 <?php
 
 include_once('connect.php');
-
+// include_once('autentica.php');
 
 function retorna($connect, $id_produto){
     $id_produto = mysqli_escape_string($connect, $_POST['id_produto']);
@@ -9,10 +9,11 @@ function retorna($connect, $id_produto){
     $desc = mysqli_escape_string($connect, $_POST['desc']);
     $venda = mysqli_escape_string($connect, $_POST['venda']);
     $cod = mysqli_escape_string($connect, $_POST['cod']);
-
+    
     if ($id_produto > 0) {
-        $sql = "UPDATE produtos SET codigo = '$cod', custo = '$custo', descricao = '$desc', venda = '$venda', WHERE  id_produto = '$id_produto';";
+        $sql = "UPDATE produtos SET codigo = '$cod', custo = '$custo', descricao = '$desc', venda = '$venda' WHERE  id_produto = '$id_produto';";
         $resultado = mysqli_query($connect, $sql);
+        
     } else {
         
         $sql = "INSERT INTO produtos(codigo, custo, venda, descricao) VALUES ('$cod', '$custo', '$venda', '$desc');";

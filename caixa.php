@@ -20,7 +20,7 @@ include_once('menu.php');
     label{font-size: 170%}
 </style>
 <div class="right_col" role="main">
-<div id="msg" class="alert alert-success fade show" role="alert" style="opacity:0; text-align: center; display: fixed"></div>
+<div id="msg"  class ="fade show" role="alert"></div>
     <h1>Caixa</h1>
 
     <div id="central" name="central">
@@ -91,16 +91,16 @@ include_once('menu.php');
             </div>
             <div class="col-sm-1 col-md-4 ">
                 <label for="vtot" >Valor Total: </label>
-                <input type="text" style="font-size: 150%; background-color: #fff" name="vtot" id="vtot" class="form-control" autocomplete="off" maxlength="10" placeholder="R$" disabled><br>
+                <input type="text" style="font-size: 150%; background-color: #fff" name="vtot" id="vtot" class="form-control" autocomplete="off" maxlength="10" placeholder="0,00" disabled><br>
             </div>
             <div class="clearfix"></div>
             <div class="col-sm-1 col-md-4 ">
                 <label for="vrec" >Valor Recebido: </label>
-                <input type="text" style="font-size: 150%; background-color: #fff" name="vrec" id="vrec" class="form-control" autocomplete="off" maxlength="10" placeholder="R$" disabled><br>
+                <input type="text" style="font-size: 150%; background-color: #fff" name="vrec" id="vrec" class="form-control" autocomplete="off" maxlength="10" placeholder="0,00" onkeyup="formatarMoeda('vrec')" disabled><br>
             </div>
             <div class="col-sm-1 col-md-4 ">
-                <label for="troco" style="font-size: 250%">Troco: </label>
-                <input type="text" style="font-size: 150%; background-color: #fff" name="troco" id="troco" class="form-control" autocomplete="off" maxlength="10" placeholder="R$" disabled><br>
+                <label for="troco" style="font-size: 150%">Troco: </label>
+                <input type="text" style="font-size: 150%; background-color: #fff" name="troco" id="troco" class="form-control" autocomplete="off" maxlength="10" placeholder="0,00" disabled><br>
             </div>
             <div class="clearfix"></div>
            
