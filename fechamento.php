@@ -3,7 +3,10 @@
 session_start();
 include_once('connect.php');
 include_once('autentica.php');
+use Dompdf\Dompdf;
+require_once 'dompdf/autoload.inc.php';
 
+$dompdf = new DOMPDF();
 $sqlcaixa = "SELECT p.codigo, p.descricao, SUM(i.qtde_item) qtde, SUM(i.valor) valor FROM itens_venda i 
 JOIN produtos p ON i.id_item_vend = p.id_produto 
 LEFT JOIN vendas v ON i.id_venda = v.id_vend 
@@ -23,7 +26,7 @@ include_once('menu.php');
 ?>
 
 <!-- conteudo -->
-
+$dompdf->load_html('
 <div class="right_col" role="main">
     <div id="msg"  class ="fade show" role="alert"></div>
     <h1>Fechamento de Caixa</h1>
@@ -95,7 +98,7 @@ include_once('menu.php');
         </form>
     </div>
 </div>
-
+');
 <!-- Fim do conteudo -->
 <!-- Rodapé  -->
 <?php

@@ -1,28 +1,3 @@
-/*
-$(document).ready(function(){
-    $('#gerar').click(function() {
-      savePDF(document.querySelector('#teste'));
-    });
-});
-  
-function savePDF(codigoHTML) {
-  var doc = new jsPDF('portrait', 'pt', 'a4'),
-      data = new Date();
-  margins = {
-    top: 40,
-    bottom: 60,
-    left: 40,
-    width: 1000
-  };
-  doc.fromHTML(codigoHTML,
-               margins.left, // x coord
-               margins.top, { pagesplit: true },
-               function(dispose){
-    doc.save("Balancete - "+data.getDate()+"/"+data.getMonth()+"/"+data.getFullYear()+".pdf");
-  });
-}
-*/
-
 $(document).ready(function(){
 
   //pdf 	
@@ -54,28 +29,29 @@ $(document).ready(function(){
                 doc.addImage(imgData, 'jpeg', 20, position, imgWidth + fix_imgWidth, imgHeight + fix_imgHeight);
                 heightLeft -= pageHeight;
               }
-              doc.save("Balancete - "+data.getDate()+"/"+data.getMonth()+"/"+data.getFullYear()+".pdf");
+              var mes = (data.getMonth()+1)
+              doc.save("Balancete - "+data.getDate()+"/"+mes+"/"+data.getFullYear()+".pdf");
           }  
       });
   
   });
-  });
+});
 
 /*
-function gerar_pdf(){
-
-    
-    var dados = document.getElementById('teste').innerHTML
-
-    var janela = window.open('','','wigth=800,heigth=600')
-    janela.document.write('<html><head>')
-    janela.document.write('<title>PDF</title></head>')
-    janela.document.write('<body.')
-    janela.document.write(dados)
-    janela.document.write('</body></html>')
-    // janela.document.close()
-    janela.open()
-}    
-
-*/ 
-
+// novo teste
+var doc = new jsPDF({
+  orientation: 'retrato',
+  unit: 'cm',
+  format: 'a4'
+})
+// doc.text('Hello Word', 10, 10)
+var source = window.document.getElementById("pdf")[0]
+doc.fromHTML(
+  source,
+  1,
+  1,
+  {
+    'wigth': 180
+  })
+  doc.output('dataurlnewwindow')
+  */
